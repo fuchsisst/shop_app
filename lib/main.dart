@@ -11,7 +11,7 @@ class Home extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
      appBar: AppBar(title: const Text('Shop App'),),
-      body: const Center(child: Text('This is a shop app'))
+      body:  Center(child: Text('This is a shop app'))
     );
   }
 }
