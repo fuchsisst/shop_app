@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../models/product.dart';
+import '../widgets/product_item.dart';
 
 class ProductOverviewScreen extends StatelessWidget {
   ProductOverviewScreen({Key? key}) : super(key: key);
@@ -39,6 +40,7 @@ class ProductOverviewScreen extends StatelessWidget {
           'https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Cast-Iron-Pan.jpg/1024px-Cast-Iron-Pan.jpg',
     ),
   ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -53,7 +55,7 @@ class ProductOverviewScreen extends StatelessWidget {
               childAspectRatio: 3 / 2,
               mainAxisSpacing: 10,
               crossAxisSpacing: 10),
-          itemBuilder: (ctx, i) => Container()),
+          itemBuilder: (ctx, i) => ProductItem(id: loadedProducts[i].id, title: loadedProducts[i].title, imageUrl: loadedProducts[i].imageUrl)),
     );
   }
 }
