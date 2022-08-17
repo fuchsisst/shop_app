@@ -8,9 +8,14 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ThemeData theme = ThemeData();
     return MaterialApp(
       title: 'MyShop',
-      theme: ThemeData(primarySwatch: Colors.blue),
+      theme: ThemeData(
+        primaryColor: Colors.purple,
+        colorScheme: theme.colorScheme.copyWith(secondary: Colors.deepOrangeAccent),
+        fontFamily: 'Lato'
+      ),
       home: ProductOverviewScreen(),
     );
   }
