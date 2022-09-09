@@ -6,9 +6,7 @@ import '../providers/cart.dart';
 import '../providers/product.dart';
 
 class ProductItem extends StatelessWidget {
-  const ProductItem(
-      {Key? key})
-      : super(key: key);
+  const ProductItem({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -27,27 +25,30 @@ class ProductItem extends StatelessWidget {
               fit: BoxFit.cover,
             ),
             footer: GridTileBar(
-              backgroundColor: Colors.black87,
-              leading: Consumer<Product>(
-                builder: (ctx, product, _ ) => IconButton(
-                  icon: product.isFavorite ? const Icon(Icons.favorite) : const Icon(Icons.favorite_outline),
-                  onPressed: () {
-                    product.toggleFavoriteStatus();
-                  },
-                  color: Theme.of(context).colorScheme.secondary,
+                backgroundColor: Colors.black87,
+                leading: Consumer<Product>(
+                  builder: (ctx, product, _) => IconButton(
+                    icon: product.isFavorite
+                        ? const Icon(Icons.favorite)
+                        : const Icon(Icons.favorite_outline),
+                    onPressed: () {
+                      product.toggleFavoriteStatus();
+                    },
+                    color: Theme.of(context).colorScheme.secondary,
+                  ),
                 ),
-              ),
-              title: Text(
-                product.title,
-                textAlign: TextAlign.center,
-              ),
-              trailing: IconButton(
-                icon: const Icon(Icons.shopping_cart),
-                onPressed: () {},
-                color: Theme.of(context).colorScheme.secondary,
-              ),
-            )),
-      ),
+                title: Text(
+                  product.title,
+                  textAlign: TextAlign.center,
+                ),
+                trailing: IconButton(
+                    icon: const Icon(Icons.shopping_cart),
+                    onPressed: () {
+                      cart.addItem(product.id, product.title, product.price);
+                    },
+                    color: Theme.of(context).colorScheme.secondary,
+                  ),
+                ))),
     );
   }
 }
