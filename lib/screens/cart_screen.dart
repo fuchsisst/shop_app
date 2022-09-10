@@ -11,7 +11,9 @@ class CartScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final cart = Provider.of<Cart>(context);
     return Scaffold(
-      appBar: AppBar(title: const Text('Cart'),),
+      appBar: AppBar(
+        title: const Text('Cart'),
+      ),
       body: Column(
         children: <Widget>[
           Card(
@@ -21,11 +23,25 @@ class CartScreen extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
-                Text('Total:', style: TextStyle(fontSize: 20, color: Theme.of(context).colorScheme.secondary,),),
+                  Text(
+                    'Total:',
+                    style: TextStyle(
+                      fontSize: 20,
+                      color: Theme.of(context).colorScheme.secondary,
+                    ),
+                  ),
                   const Spacer(),
-                  Chip(label: Text('\$${cart.totalAmount}'), backgroundColor: Theme.of(context).primaryColor,),
-                  TextButton(onPressed: (){}, child: const Text("ORDER NOW"))
-              ],),
+                  Chip(
+                    label: Text(
+                      '\$${cart.totalAmount}',
+                      style: TextStyle(
+                          color: Theme.of(context).secondaryHeaderColor),
+                    ),
+                    backgroundColor: Theme.of(context).primaryColor,
+                  ),
+                  TextButton(onPressed: () {}, child: const Text("ORDER NOW"))
+                ],
+              ),
             ),
           )
         ],

@@ -13,8 +13,10 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final ThemeData theme =
-        ThemeData(primarySwatch: Colors.purple, fontFamily: 'Lato');
+    final ThemeData theme = ThemeData(
+        primarySwatch: Colors.purple,
+        fontFamily: 'Lato',
+        secondaryHeaderColor: Colors.white70);
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(
