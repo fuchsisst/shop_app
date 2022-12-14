@@ -41,23 +41,23 @@ class CartScreen extends StatelessWidget {
                     backgroundColor: Theme.of(context).primaryColor,
                   ),
                   TextButton(onPressed: () {}, child: const Text("ORDER NOW")),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  Expanded(
-                      child: ListView.builder(
-                    itemBuilder: (ctx, i) => CartItem(
-                        id: cart.items.values.toList()[i].id,
-                        productId: cart.items.keys.toList()[i],
-                        price: cart.items.values.toList()[i].price,
-                        quantity: cart.items.values.toList()[i].quantity,
-                        title: cart.items.values.toList()[i].title),
-                    itemCount: cart.items.length,
-                  ))
                 ],
               ),
             ),
-          )
+          ),
+          const SizedBox(
+            height: 10,
+          ),
+          Expanded(
+              child: ListView.builder(
+                itemBuilder: (ctx, i) => CartItem(
+                    id: cart.items.values.toList()[i].id,
+                    productId: cart.items.keys.toList()[i],
+                    price: cart.items.values.toList()[i].price,
+                    quantity: cart.items.values.toList()[i].quantity,
+                    title: cart.items.values.toList()[i].title),
+                itemCount: cart.items.length,
+              ))
         ],
       ),
     );
