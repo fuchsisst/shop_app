@@ -3,7 +3,9 @@ import 'package:provider/provider.dart';
 import 'package:shop_app/widgets/order_item.dart';
 
 import '../providers/orders.dart' show Orders;
+import '../widgets/app_draw.dart';
 class OrdersScreen extends StatelessWidget {
+  static const routeName = '/orders';
   const OrdersScreen({Key? key}) : super(key: key);
 
   @override
@@ -12,6 +14,7 @@ class OrdersScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: const Text('Your Orders'),
       ),
+      drawer: const AppDrawer(),
       body: ListView.builder(itemCount: orderData.orders.length, itemBuilder: (ctx, i) => OrderItem(order: orderData.orders[i])) ,
     );
   }
