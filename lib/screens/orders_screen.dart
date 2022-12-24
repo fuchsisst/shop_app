@@ -4,6 +4,7 @@ import 'package:shop_app/widgets/order_item.dart';
 
 import '../providers/orders.dart' show Orders;
 import '../widgets/app_draw.dart';
+
 class OrdersScreen extends StatelessWidget {
   static const routeName = '/orders';
   const OrdersScreen({Key? key}) : super(key: key);
@@ -12,10 +13,13 @@ class OrdersScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final orderData = Provider.of<Orders>(context);
     return Scaffold(
-      appBar: AppBar(title: const Text('Your Orders'),
+      appBar: AppBar(
+        title: const Text('Your Orders'),
       ),
       drawer: const AppDrawer(),
-      body: ListView.builder(itemCount: orderData.orders.length, itemBuilder: (ctx, i) => OrderItem(order: orderData.orders[i])) ,
+      body: ListView.builder(
+          itemCount: orderData.orders.length,
+          itemBuilder: (ctx, i) => OrderItem(order: orderData.orders[i])),
     );
   }
 }
