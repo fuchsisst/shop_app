@@ -10,7 +10,14 @@ class CartItem extends StatelessWidget {
   final int quantity;
   final String title;
 
-  const CartItem({required this.id, required this.productId, required this.price, required this.quantity, required this.title, Key? key}) : super(key: key);
+  const CartItem(
+      {required this.id,
+      required this.productId,
+      required this.price,
+      required this.quantity,
+      required this.title,
+      Key? key})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -21,30 +28,39 @@ class CartItem extends StatelessWidget {
         child: const Icon(Icons.delete, color: Colors.white, size: 40),
         alignment: Alignment.centerRight,
         padding: const EdgeInsets.only(right: 20),
-        margin: const EdgeInsets.symmetric(
-            vertical: 4,
-            horizontal: 15
-        ),
+        margin: const EdgeInsets.symmetric(vertical: 4, horizontal: 15),
       ),
       direction: DismissDirection.endToStart,
-      confirmDismiss: (direction){
-        return showDialog(context: context, builder: (ctx) => AlertDialog(title: Text('Are you sure?'), content: Text('Dou you want to remove the item from the cart?'), actions: <Widget>[
-          TextButton(onPressed: (){
-            Navigator.of(ctx).pop(false);
-          }, child: Text('No')),
-          TextButton(onPressed: (){
-            Navigator.of(ctx).pop(true);
-          }, child: Text('Yes')),
-        ],));
+      confirmDismiss: (direction) {
+        return showDialog(
+            context: context,
+            builder: (ctx) => AlertDialog(
+                  title: const Text('Are you sure?'),
+                  content: const Text(
+                      'Dou you want to remove the item from the cart?'),
+                  actions: <Widget>[
+                    TextButton(
+                        onPressed: () {
+                          Navigator.of(ctx).pop(false);
+                        },
+                        child: const Text('No')),
+                    TextButton(
+                        onPressed: () {
+                          Navigator.of(ctx).pop(true);
+                        },
+                        child: const Text('Yes')),
+                  ],
+                ));
       },
-      onDismissed: (direction){
+      onDismissed: (direction) {
         Provider.of<Cart>(context, listen: false).removeItem(productId);
       },
       child: Card(
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: ListTile(
-            leading: CircleAvatar(child: Padding(
+            leading: CircleAvatar(
+                child: Padding(
               padding: const EdgeInsets.all(5.0),
               child: FittedBox(child: Text('\$$price')),
             )),
