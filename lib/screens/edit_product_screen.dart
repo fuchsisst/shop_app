@@ -19,25 +19,24 @@ class _EditProductScreenState extends State<EditProductScreen> {
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: Form(child: ListView(children: <Widget>[
-          TextFormField(
-            decoration: const InputDecoration(
-              labelText: 'Title'
+        child: Form(
+            child: ListView(
+          children: <Widget>[
+            TextFormField(
+              decoration: const InputDecoration(labelText: 'Title'),
+              textInputAction: TextInputAction.next,
+              onFieldSubmitted: (_) {
+                FocusScope.of(context).requestFocus(_priceFocusNode);
+              },
             ),
-            textInputAction: TextInputAction.next,
-            onFieldSubmitted: (_) {
-              FocusScope.of(context).requestFocus(_priceFocusNode);
-            },
-          ),
-          TextFormField(
-            decoration: const InputDecoration(
-                labelText: 'Price'
+            TextFormField(
+              decoration: const InputDecoration(labelText: 'Price'),
+              textInputAction: TextInputAction.next,
+              keyboardType: TextInputType.number,
+              focusNode: _priceFocusNode,
             ),
-            textInputAction: TextInputAction.next,
-            keyboardType: TextInputType.number,
-            focusNode: _priceFocusNode,
-          ),
-        ],)),
+          ],
+        )),
       ),
     );
   }
