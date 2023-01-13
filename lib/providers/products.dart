@@ -41,9 +41,6 @@ class Products with ChangeNotifier {
   ];
 
   List<Product> get items {
-    // if(_showFavoritesOnly) {
-    //   return _items.where((prodItem) => prodItem.isFavorite).toList();
-    // }
     return [..._items];
   }
 
@@ -66,14 +63,16 @@ class Products with ChangeNotifier {
   // }
 
   void addProduct(Product product) {
-    final url = Uri.parse('https://flutter-shop-app-2229a-default-rtdb.firebaseio.com/products.json');
-    post(url, body: json.encode({
-      'title': product.title,
-      'description': product.description,
-      'imageUrl': product.imageUrl,
-      'price': product.price,
-      'isFavorite': product.isFavorite,
-    }));
+    final url = Uri.parse(
+        'https://flutter-shop-app-2229a-default-rtdb.firebaseio.com/products.json');
+    post(url,
+        body: json.encode({
+          'title': product.title,
+          'description': product.description,
+          'imageUrl': product.imageUrl,
+          'price': product.price,
+          'isFavorite': product.isFavorite,
+        }));
     final newProduct = Product(
         id: DateTime.now().toString(),
         title: product.title,
