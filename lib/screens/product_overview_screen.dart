@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:http/http.dart';
 import 'package:provider/provider.dart';
 import 'package:shop_app/screens/cart_screen.dart';
 import 'package:shop_app/widgets/app_draw.dart';
 
 import '../providers/cart.dart';
+import '../providers/products.dart';
 import '../widgets/badge.dart';
 import '../widgets/products_grid.dart';
 
@@ -18,7 +20,26 @@ class ProductOverviewScreen extends StatefulWidget {
 
 class _ProductOverviewScreenState extends State<ProductOverviewScreen> {
   var _showOnlyFavorites = false;
+  var _isInit = true;
+
   @override
+  void initState() {
+   // Provider.of<Products>(context).fetchAndSetProducts(); wont work
+   //  Future.delayed(Duration.zero).then((value) {
+   //    Provider.of<Products>(context).fetchAndSetProducts();
+   //  } );
+    super.initState();
+  }
+
+  @override
+  void didChangeDependencies() {
+    if(_isInit){
+      Provider.of<Products>(context).fetchAndSetProducts();
+    }
+    _isInit = false;
+    super.didChangeDependencies();
+  }
+
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
