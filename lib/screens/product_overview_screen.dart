@@ -21,20 +21,28 @@ class ProductOverviewScreen extends StatefulWidget {
 class _ProductOverviewScreenState extends State<ProductOverviewScreen> {
   var _showOnlyFavorites = false;
   var _isInit = true;
+  var _isLoading = false;
 
   @override
   void initState() {
-   // Provider.of<Products>(context).fetchAndSetProducts(); wont work
-   //  Future.delayed(Duration.zero).then((value) {
-   //    Provider.of<Products>(context).fetchAndSetProducts();
-   //  } );
+    // Provider.of<Products>(context).fetchAndSetProducts(); wont work
+    //  Future.delayed(Duration.zero).then((value) {
+    //    Provider.of<Products>(context).fetchAndSetProducts();
+    //  } );
     super.initState();
   }
 
   @override
   void didChangeDependencies() {
-    if(_isInit){
-      Provider.of<Products>(context).fetchAndSetProducts();
+    if (_isInit) {
+      setState(() {
+        _isLoading = true;
+      });
+      Provider.of<Products>(context).fetchAndSetProducts().then((_) {
+        setState(() {
+          _isLoading = false;
+        });
+      });
     }
     _isInit = false;
     super.didChangeDependencies();
@@ -79,7 +87,11 @@ class _ProductOverviewScreenState extends State<ProductOverviewScreen> {
         ],
       ),
       drawer: const AppDrawer(),
-      body: ProductsGrid(showFavs: _showOnlyFavorites),
+      body: _isLoading
+          ? const Center(
+              child: CircularProgressIndicator(),
+            )
+          : ProductsGrid(showFavs: _showOnlyFavorites),
     );
   }
 }
