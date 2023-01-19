@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart';
+import 'package:shop_app/models/http_exeption.dart';
 import 'dart:convert';
 
 import 'product.dart';
@@ -88,19 +89,19 @@ class Products with ChangeNotifier {
     }
   }
 
-  void deleteProduct(String id) {
+  Future<void> deleteProduct(String id) async {
     final url = Uri.parse(
-        'https://flutter-shop-app-2229a-default-rtdb.firebaseio.com/products/$id');
+        'https://flutter-shop-app-2229a-default-rtdb.firebaseio.com/products/$id.json');
     final existingProductIndex = _items.indexWhere((prod) => prod.id == id);
     Product? existingProduct = _items[existingProductIndex];
-    delete(url).then((response) {
-      if (response.statusCode >= 400) {}
-      existingProduct = null;
-    }).catchError((_) {
-      _items.insert(existingProductIndex, existingProduct as Product);
-      notifyListeners();
-    });
     _items.removeAt(existingProductIndex);
     notifyListeners();
+    final response = await delete(url);
+    if (response.statusCode >= 400) {
+      _items.insert(existingProductIndex, existingProduct as Product);
+      notifyListeners();
+      throw HttpException('Could not delete product.');
+    }
+    existingProduct = null;
   }
 }
