@@ -7,6 +7,7 @@ import 'package:shop_app/screens/user_products_screen.dart';
 import './providers/products.dart';
 import './screens/product_detail_screen.dart';
 import './screens/product_overview_screen.dart';
+import './screens/auth_screen.dart';
 import 'providers/cart.dart';
 import 'providers/orders.dart';
 
@@ -38,13 +39,14 @@ class MyApp extends StatelessWidget {
           colorScheme:
               theme.colorScheme.copyWith(secondary: Colors.deepOrangeAccent),
         ),
-        home: const ProductOverviewScreen(),
+        home: const AuthScreen(),
         routes: {
           ProductDetailScreen.routeName: (ctx) => const ProductDetailScreen(),
           CartScreen.routeName: (ctx) => const CartScreen(),
           OrdersScreen.routeName: (ctx) => const OrdersScreen(),
           UserProductsScreen.routeName: (ctx) => const UserProductsScreen(),
-          EditProductScreen.routeName: (ctx) => const EditProductScreen()
+          EditProductScreen.routeName: (ctx) => const EditProductScreen(),
+
         },
       ),
     );

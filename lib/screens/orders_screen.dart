@@ -15,7 +15,7 @@ class OrdersScreen extends StatefulWidget {
 
 class _OrdersScreenState extends State<OrdersScreen> {
   late Future _ordersFuture;
-  Future _obtainOrdersFuture(){
+  Future _obtainOrdersFuture() {
     return Provider.of<Orders>(context, listen: false).fetchAndSetOrders();
   }
 
@@ -24,6 +24,7 @@ class _OrdersScreenState extends State<OrdersScreen> {
     _ordersFuture = _obtainOrdersFuture();
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
 //    final orderData = Provider.of<Orders>(context);
@@ -46,11 +47,12 @@ class _OrdersScreenState extends State<OrdersScreen> {
                   child: Text('An error occurred!'),
                 );
               } else {
-                return Consumer<Orders>(builder: (ctx, orderData, child) => ListView.builder(
+                return Consumer<Orders>(
+                  builder: (ctx, orderData, child) => ListView.builder(
                       itemCount: orderData.orders.length,
                       itemBuilder: (ctx, i) =>
-                          OrderItem(order: orderData.orders[i]))
-                ,);
+                          OrderItem(order: orderData.orders[i])),
+                );
               }
             }
           },
